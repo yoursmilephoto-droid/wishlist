@@ -299,7 +299,6 @@ body{
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
@@ -320,7 +319,6 @@ body{
   </div>
 </section>
 
-<!-- GIFTS -->
 <section class="gifts">
   <div class="gifts-grid" id="giftsGrid"></div>
   <div class="progress" id="progressDots"></div>
@@ -328,7 +326,6 @@ body{
 
 <div class="page-footer">С любовью 🧡 Ждём тебя на&nbsp;<b>Полигоне</b></div>
 
-<!-- MODAL -->
 <div class="overlay" id="overlay">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -391,6 +388,41 @@ const ITEMS = [
     desc:'Беспроводные TWS, шумоподавление', price:'4 099 ₽', store:'Яндекс Маркет',
     url:'https://market.yandex.ru/card/besprovodnyye-naushniki-commo-one-20-svetlo-goluboy/5208062195',
     img:'https://avatars.mds.yandex.net/get-mpic/18505141/2a0000019ca6024c6fab5795239a4d836719/orig' },
+
+  { id:10, emoji:'📚', name:'Heyone MiMi Books',
+    desc:'Фигурка-сюрприз, серия About Youth', price:'1 750 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/1-sht-figurka-syurpriz-heyone-mimi-books-about-youth-series-3103821032/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-m/wc1000/7112028826.jpg' },
+
+  { id:11, emoji:'🏸', name:'Набор для бадминтона Wish',
+    desc:'Steeltec 216, 2 ракетки + 2 волана', price:'1 259 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/nabor-dlya-badmintona-wish-steeltec-216-2-raketki-2-volana-zelenyy-siniy-badminton-nabor-vzroslyy-207415598/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-n/wc1000/7016279531.jpg' },
+
+  { id:12, emoji:'🏴‍☠️', name:'Книга «Остров пиратов»',
+    desc:'Буква-Ленд, книга с фонариком', price:'269 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/knizhka-s-fonarikom-sokrovishcha-ostrova-piratov-bukva-lend-kniga-s-fonarikom-detskaya-sachkova-2372071393/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-q/wc1000/9460747082.jpg' },
+
+  { id:13, emoji:'🥁', name:'Барабанные палочки 7A',
+    desc:'Черный клен, деревянный наконечник', price:'512 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/7a-barabannye-palochki-derevyannyy-nakonechnik-chernye-klen-yamaha-1045813222/',
+    img:'https://ir.ozone.ru/s3/multimedia-s/wc1000/6658091176.jpg' },
+
+  { id:14, emoji:'🛡️', name:'Набор наколенников и налокотников',
+    desc:'Защита для активного спорта', price:'1 088 ₽', store:'Wildberries',
+    url:'https://www.wildberries.ru/catalog/158906062/detail.aspx',
+    img:'https://basket-10.wb.ru/vol1589/part158906/158906062/images/big/1.webp' },
+
+  { id:15, emoji:'🏒', name:'Хоккейная лента TSP',
+    desc:'Белая, 24 мм х 22.8 м, сделано в США', price:'690 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/lenta-hokkeynaya-dlya-klyushki-tsp-ssha-belaya-24-mm-x-22-8-m-259622404/',
+    img:'https://ir.ozone.ru/s3/multimedia-s/wc1000/6063628480.jpg' },
+
+  { id:16, emoji:'🔟', name:'Наклейки цифр на шлем',
+    desc:'ХК Динамо Москва, синие', price:'350 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/sinie-nakleyki-tsifr-na-shlem-hk-dinamo-moskva-khl-hokkey-2892458379/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-e/wc1000/8051663186.jpg' },
 ];
 
 let reservations = {};
@@ -451,20 +483,14 @@ function cardHTML(item, idx) {
 </div>`;
 }
 
-// Progress dots (mobile only)
 function initProgressDots() {
   const isMobile = window.innerWidth < 680;
   if (!isMobile) return;
   const dots = document.getElementById('progressDots');
-  // move dots inside .gifts section visually via CSS position:fixed
   dots.innerHTML = ITEMS.map((_, i) =>
     `<div class="progress-dot${i === 0 ? ' active' : ''}" data-i="${i}"></div>`
   ).join('');
-
-  // make dots fixed on mobile
   dots.style.cssText = 'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:50;pointer-events:none';
-
-  // IntersectionObserver to track which card is visible
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -475,7 +501,6 @@ function initProgressDots() {
       }
     });
   }, { threshold: 0.5 });
-
   document.querySelectorAll('.gift-card').forEach(c => observer.observe(c));
 }
 
