@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Вишлист · Тимофей 9 лет 🎯</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080c0a;
+  --card:#111810;
+  --border:rgba(57,255,100,0.10);
+  --border-hi:rgba(57,255,100,0.28);
+  --green:#39ff64;
+  --green-dim:rgba(57,255,100,0.07);
+  --text:#e8f0ea;
+  --muted:#5a6e5e;
+  --yellow:#ffd060;
+  --red:#ff4444;
+  --r:18px;
+}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ════════ HERO ════════ */
+.hero{
+  position:relative;
+  height:100svh;min-height:560px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:2rem 1.5rem 5rem;
+  overflow:hidden;
+  scroll-snap-align:start;
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(57,255,100,.033) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,255,100,.033) 1px,transparent 1px);
+  background-size:42px 42px;
+  animation:gridMove 22s linear infinite;
+}
+@keyframes gridMove{to{background-position:42px 42px}}
+.hero-glow{
+  position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(57,255,100,.11) 0%,transparent 68%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:glowPulse 4s ease-in-out infinite;pointer-events:none;
+}
+@keyframes glowPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.8}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
+/* scanlines */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);
+}
+.hero-inner{position:relative;z-index:2;max-width:400px}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green);border:1px solid var(--border-hi);
+  padding:5px 14px;border-radius:20px;
+  background:var(--green-dim);margin-bottom:1.75rem;
+  animation:fadeDown .5s ease both;
+}
+.hero-title{
+  font-size:clamp(38px,12vw,64px);
+  font-weight:800;letter-spacing:-.03em;line-height:1;
+  margin-bottom:.6rem;
+  animation:fadeDown .5s .08s ease both;
+}
+.hero-title em{font-style:normal;color:var(--green)}
+.hero-name{
+  font-size:clamp(18px,5vw,26px);font-weight:700;
+  color:var(--muted);margin-bottom:2.25rem;letter-spacing:-.01em;
+  animation:fadeDown .5s .16s ease both;
+}
+.hero-stats{
+  display:flex;gap:1.5rem;justify-content:center;
+  animation:fadeDown .5s .24s ease both;
+}
+.stat{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%}
+.dot-free{background:var(--green);box-shadow:0 0 7px var(--green)}
+.dot-taken{background:var(--yellow)}
+
+/* arrow down */
+.hero-arrow{
+  position:absolute;bottom:2.25rem;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:5px;
+  animation:fadeDown .5s .5s ease both;
+}
+.hero-arrow span{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hero-arrow svg{animation:arrowBounce 1.6s ease-in-out infinite}
+@keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ════════ CARDS SECTION ════════ */
+.gifts{padding:0 0 4rem}
+
+/* Mobile: full-screen vertical snap cards */
+@media(max-width:679px){
+  .gifts{padding:0}
+  .gift-card{
+    height:100svh;min-height:560px;
+    scroll-snap-align:start;
+    display:flex;flex-direction:column;
+    border-radius:0;border-left:none;border-right:none;
+    border-top:1px solid var(--border);border-bottom:none;
+    position:relative;overflow:hidden;
+  }
+  .card-img{flex:1;height:auto;min-height:0}
+  .card-img img{height:100%;object-fit:cover}
+  .card-body{
+    flex-shrink:0;
+    padding:20px 20px 36px;
+    background:linear-gradient(0deg,#080c0a 80%,transparent);
+    position:relative;
+  }
+  /* number indicator */
+  .card-num{
+    display:block;
+    font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px;
+  }
+  .card-name{font-size:20px}
+  .card-price{font-size:26px}
+  /* progress dots */
+  .progress{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+    display:flex;gap:5px;
+  }
+  .progress-dot{
+    width:5px;height:5px;border-radius:50%;
+    background:rgba(255,255,255,.2);transition:background .2s;
+  }
+  .progress-dot.active{background:var(--green);box-shadow:0 0 5px var(--green)}
+}
+
+/* Desktop: grid */
+@media(min-width:680px){
+  .gifts{padding:1rem 1.25rem 4rem;max-width:980px;margin:0 auto}
+  .gifts-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;
+  }
+  .gift-card{
+    border-radius:var(--r);
+    background:var(--card);
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:border-color .2s,transform .2s,box-shadow .2s;
+  }
+  .gift-card:hover{
+    border-color:var(--border-hi);
+    transform:translateY(-3px);
+    box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 0 1px rgba(57,255,100,.08);
+  }
+  .card-img{height:220px}
+  .card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+  .gift-card:hover .card-img img{transform:scale(1.05)}
+  .card-num{display:none}
+  .progress{display:none}
+  .card-body{padding:14px 16px 16px;background:var(--card)}
+}
+
+/* ── shared card parts ── */
+.gift-card{position:relative}
+.gift-card.taken{opacity:.55}
+.gift-card.taken .card-img::after{
+  content:'✓ Уже берут';
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.78);color:var(--green);
+  font-size:11px;font-weight:800;
+  padding:5px 14px;border-radius:20px;
+  border:1px solid rgba(57,255,100,.3);
+  white-space:nowrap;
+}
+
+.card-img{position:relative;background:#0a100c;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.img-fallback{
+  width:100%;height:100%;position:absolute;inset:0;
+  display:none;align-items:center;justify-content:center;font-size:72px;
+}
+
+.badge-store{
+  position:absolute;top:10px;left:10px;
+  background:rgba(8,12,10,.85);color:var(--green);
+  font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;border:1px solid rgba(57,255,100,.2);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+
+.card-body{position:relative;z-index:2}
+.card-name{
+  font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.3;margin-bottom:4px;
+}
+.card-desc{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+.card-price{
+  font-size:22px;font-weight:800;color:var(--green);
+  margin-bottom:12px;letter-spacing:-.01em;
+}
+
+.card-foot{display:flex;gap:8px;align-items:center}
+.taker-info{
+  flex:1;font-size:12px;font-weight:700;color:#00c94a;
+  overflow:hidden;display:flex;align-items:center;gap:5px;
+}
+.taker-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ── Buttons ── */
+.btn{
+  font-family:inherit;font-weight:700;font-size:13px;
+  padding:9px 16px;border:none;border-radius:40px;
+  cursor:pointer;transition:opacity .12s,transform .1s;
+  text-decoration:none;display:inline-flex;align-items:center;
+  gap:5px;white-space:nowrap;line-height:1;
+}
+.btn:active{transform:scale(.96)}
+.btn-reserve{
+  flex:1;justify-content:center;
+  background:var(--green);color:#080c0a;font-weight:800;
+  box-shadow:0 0 16px rgba(57,255,100,.22);
+}
+.btn-reserve:hover{opacity:.85}
+.btn-link{
+  background:var(--green-dim);color:var(--green);
+  border:1px solid var(--border);padding:9px 12px;font-size:14px;
+}
+.btn-link:hover{background:rgba(57,255,100,.13)}
+.btn-cancel{
+  background:rgba(255,68,68,.08);color:var(--red);
+  border:1px solid rgba(255,68,68,.15);font-size:11px;padding:7px 11px;
+}
+
+/* ════════ MODAL ════════ */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:900;display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .22s;
+}
+.overlay.open{opacity:1;pointer-events:all}
+.sheet{
+  background:#0e1410;border-radius:22px 22px 0 0;
+  border-top:1px solid var(--border-hi);
+  padding:1.75rem 1.5rem 2.5rem;
+  width:100%;max-width:540px;
+  transform:translateY(48px);
+  transition:transform .28s cubic-bezier(.34,1.42,.64,1);
+}
+.overlay.open .sheet{transform:translateY(0)}
+.sheet-handle{width:36px;height:3px;background:var(--border-hi);border-radius:3px;margin:0 auto 1.5rem}
+.sheet-title{font-size:17px;font-weight:800;margin-bottom:5px}
+.sheet-hint{font-size:13px;color:var(--muted);margin-bottom:1.25rem;line-height:1.5}
+.sheet input{
+  width:100%;font-family:inherit;font-size:16px;font-weight:600;
+  padding:13px 15px;background:#0a100c;color:var(--text);
+  border:1px solid var(--border-hi);border-radius:12px;
+  outline:none;margin-bottom:12px;-webkit-appearance:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.sheet input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(57,255,100,.1)}
+.sheet input.err{border-color:var(--red)}
+.sheet-btns{display:flex;gap:10px}
+.btn-confirm{
+  flex:1;justify-content:center;background:var(--green);color:#080c0a;
+  font-weight:800;font-size:14px;padding:13px;border-radius:12px;
+  box-shadow:0 0 20px rgba(57,255,100,.28);
+}
+.btn-back{background:rgba(255,255,255,.05);color:var(--text);padding:13px 20px;border-radius:12px;border:1px solid var(--border)}
+
+/* ════════ TOAST ════════ */
+.toast{
+  position:fixed;bottom:1.75rem;left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:#0e1410;color:var(--green);
+  font-size:13px;font-weight:800;
+  padding:10px 22px;border-radius:40px;
+  border:1px solid var(--border-hi);
+  box-shadow:0 0 22px rgba(57,255,100,.18);
+  opacity:0;transition:opacity .25s,transform .25s;
+  z-index:9999;pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.page-footer{text-align:center;padding:2rem 1rem 3rem;font-size:12px;color:var(--muted)}
+.page-footer b{color:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">🎯 Лазертаг «Полигон» · 11 апреля</div>
+    <h1 class="hero-title">Выбери<br><em>подарок</em></h1>
+    <p class="hero-name">Тимофею — 9 лет</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="dot dot-free"></div><span id="sFree">…</span>&nbsp;свободно</div>
+      <div class="stat"><div class="dot dot-taken"></div><span id="sTaken">…</span>&nbsp;забронировано</div>
+    </div>
+  </div>
+  <div class="hero-arrow">
+    <span>подарки</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M5 7.5l5 5 5-5" stroke="#39ff64" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- GIFTS -->
+<section class="gifts">
+  <div class="gifts-grid" id="giftsGrid"></div>
+  <div class="progress" id="progressDots"></div>
+</section>
+
+<div class="page-footer">С любовью 🧡 Ждём тебя на&nbsp;<b>Полигоне</b></div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="sheetTitle">Забронировать</div>
+    <div class="sheet-hint">Введите своё имя — остальные увидят, что подарок уже взят.</div>
+    <input type="text" id="sheetInput" placeholder="Ваше имя" maxlength="40" autocomplete="off">
+    <div class="sheet-btns">
+      <button class="btn btn-back" onclick="closeSheet()">Назад</button>
+      <button class="btn btn-confirm" onclick="confirmBook()">✓ Подтвердить</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://n8n.vitaliylozovoy.ru/webhook/wishlist';
+
+const ITEMS = [
+  { id:1,  emoji:'🧦', name:'Носки «Хоккеист»',
+    desc:'1 пара, хлопок, принт с игроком', price:'224 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/noski-hokkeist-1-para-1649078057/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-p/wc1000/8903915017.jpg' },
+
+  { id:3,  emoji:'📱', name:'Шнурок для телефона',
+    desc:'Оранжевый, нейлон 120 см, карабин', price:'360 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/shnurok-dlya-telefona-na-sheyu-oranzhevyy-remeshok-dlya-telefona-kross-bodi-cherez-plecho-1773016993/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-9/wc1000/7349533497.jpg' },
+
+  { id:4,  emoji:'🟠', name:'Липпер 80 присосок',
+    desc:'Двухсторонний держатель для телефона', price:'165 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/lipper-dvuhstoronniy-80-prisosok-derzhatel-prisoska-dlya-telefona-3590876942/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-j/wc1000/9267632191.jpg' },
+
+  { id:5,  emoji:'📖', name:'Книга с фонариком «Волшебный замок»',
+    desc:'Буква-Ленд, квест для детей', price:'269 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/kniga-s-fonarikom-volshebnyy-zamok-bukva-lend-kvesty-dlya-detey-knigi-dlya-detey-sachkova-2372069710/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-g/wc1000/9460747060.jpg' },
+
+  { id:9,  emoji:'🎀', name:'POPMART Hirono Shelter',
+    desc:'Коллекционная фигурка, слепая коробка', price:'2 306 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/kollektsionnaya-figurka-slepaya-korobka-popmart-hirono-shelter-series-2557630855/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-0/wc1000/7926535152.jpg' },
+
+  { id:2,  emoji:'🧢', name:'Бейсболка ХК Динамо Москва',
+    desc:'Atributika & Club, хлопок + сетка', price:'2 326 ₽', store:'Ozon',
+    url:'https://www.ozon.ru/product/beysbolka-atributika-club-hk-dinamo-moskva-1944403469/',
+    img:'https://ir.ozone.ru/s3/multimedia-1-h/wc1000/7392072869.jpg' },
+
+  { id:6,  emoji:'🛏️', name:'Постельное бельё «Хоккей»',
+    desc:'1.5 спальное, поплин 100% хлопок', price:'1 859 ₽', store:'Яндекс Маркет',
+    url:'https://market.yandex.ru/card/komplekt-postelnogo-belya-15-spalnyy-poplin-100-khlopok-khokkey-komanda/101933103439',
+    img:'https://avatars.mds.yandex.net/get-mpic/7716311/img_id8884997405997317933.jpeg/orig' },
+
+  { id:7,  emoji:'🏒', name:'Funko POP! Овечкин',
+    desc:'NHL Capitals Alex Ovechkin #98, 10 см', price:'1 999 ₽', store:'Яндекс Маркет',
+    url:'https://market.yandex.ru/card/figurka-funko-pop-nhl-capitals-alex-ovechkin-gr895-exc-98-92301/5078000419',
+    img:'https://avatars.mds.yandex.net/get-mpic/16824886/2a0000019c0935b466a5d6da0fcf8328b3c6/orig' },
+
+  { id:8,  emoji:'🎧', name:'Наушники COMMO One 2.0',
+    desc:'Беспроводные TWS, шумоподавление', price:'4 099 ₽', store:'Яндекс Маркет',
+    url:'https://market.yandex.ru/card/besprovodnyye-naushniki-commo-one-20-svetlo-goluboy/5208062195',
+    img:'https://avatars.mds.yandex.net/get-mpic/18505141/2a0000019ca6024c6fab5795239a4d836719/orig' },
+];
+
+let reservations = {};
+let pendingId = null;
+
+async function loadData() {
+  try {
+    const r = await fetch(API + '?action=get', { signal: AbortSignal.timeout(5000) });
+    if (r.ok) reservations = await r.json();
+  } catch {}
+  render();
+  initProgressDots();
+}
+
+async function saveData(id, name) {
+  reservations[id] = name; render();
+  try { await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'set', id, name }) }); } catch {}
+}
+
+async function removeData(id) {
+  delete reservations[id]; render();
+  try { await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'delete', id }) }); } catch {}
+}
+
+function render() {
+  const free = ITEMS.filter(i => !reservations[i.id]).length;
+  document.getElementById('sFree').textContent  = free;
+  document.getElementById('sTaken').textContent = ITEMS.length - free;
+  document.getElementById('giftsGrid').innerHTML = ITEMS.map((item, idx) => cardHTML(item, idx)).join('');
+}
+
+function cardHTML(item, idx) {
+  const taker = reservations[item.id];
+  const taken = !!taker;
+  return `<div class="gift-card${taken ? ' taken' : ''}" id="c${item.id}" data-idx="${idx}">
+  <div class="card-img">
+    <img src="${item.img}" alt="${item.name}" loading="${idx < 2 ? 'eager' : 'lazy'}"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="img-fallback">${item.emoji}</div>
+    <span class="badge-store">${item.store}</span>
+  </div>
+  <div class="card-body">
+    <span class="card-num">${idx + 1} / ${ITEMS.length}</span>
+    <div class="card-name">${item.name}</div>
+    <div class="card-desc">${item.desc}</div>
+    <div class="card-price">${item.price}</div>
+    <div class="card-foot">
+      ${taken
+        ? `<div class="taker-info">✓ <span class="taker-name">${taker}</span></div>
+           <button class="btn btn-cancel" onclick="cancel(${item.id})">Отмена</button>`
+        : `<button class="btn btn-reserve" onclick="openSheet(${item.id})">Забронировать</button>`
+      }
+      <a class="btn btn-link" href="${item.url}" target="_blank" rel="noopener">→</a>
+    </div>
+  </div>
+</div>`;
+}
+
+// Progress dots (mobile only)
+function initProgressDots() {
+  const isMobile = window.innerWidth < 680;
+  if (!isMobile) return;
+  const dots = document.getElementById('progressDots');
+  // move dots inside .gifts section visually via CSS position:fixed
+  dots.innerHTML = ITEMS.map((_, i) =>
+    `<div class="progress-dot${i === 0 ? ' active' : ''}" data-i="${i}"></div>`
+  ).join('');
+
+  // make dots fixed on mobile
+  dots.style.cssText = 'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:50;pointer-events:none';
+
+  // IntersectionObserver to track which card is visible
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = parseInt(e.target.dataset.idx);
+        document.querySelectorAll('.progress-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.gift-card').forEach(c => observer.observe(c));
+}
+
+function openSheet(id) {
+  pendingId = id;
+  const item = ITEMS.find(i => i.id === id);
+  document.getElementById('sheetTitle').textContent = item.name;
+  const inp = document.getElementById('sheetInput');
+  inp.value = ''; inp.classList.remove('err');
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => inp.focus(), 320);
+}
+function closeSheet() {
+  document.getElementById('overlay').classList.remove('open');
+  pendingId = null;
+}
+async function confirmBook() {
+  const inp = document.getElementById('sheetInput');
+  const name = inp.value.trim();
+  if (!name) { inp.classList.add('err'); inp.focus(); return; }
+  await saveData(pendingId, name);
+  closeSheet(); showToast('🎯 Забронировано!');
+}
+async function cancel(id) { await removeData(id); showToast('Бронь снята'); }
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeSheet();
+});
+document.getElementById('sheetInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmBook();
+});
+
+loadData();
+</script>
+</body>
+</html>
